@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -7,18 +7,23 @@ import {
 import { CheckOutPageComponent } from '../check-out-page/check-out-page.component';
 import { CartServiceService } from 'src/app/service/cart-service.service';
 import { NgForm } from '@angular/forms';
+import { AuthServiceService } from 'src/app/service/auth-service.service';
 
 @Component({
   selector: 'app-shoptin-cart',
   templateUrl: './shoptin-cart.component.html',
   styleUrls: ['./shoptin-cart.component.scss'],
 })
-export class ShoptinCartComponent {
+export class ShoptinCartComponent implements OnInit {
   allCartProducts!: any;
+
+
+  loggedIn!: any;
 
   constructor(
     private dialogRef: MatDialogRef<ShoptinCartComponent>,
     private service: CartServiceService,
+    private authService: AuthServiceService,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -78,6 +83,12 @@ export class ShoptinCartComponent {
   }
   Products!: any;
   ngOnInit(): void {
+
+    console.log(this.authService.getUser());
+    this.loggedIn = this.authService.getUser();
+    console.log(JSON.parse(this.loggedIn));
+    
+
     this.service.getAllFromCart().subscribe({
       next: (r) => {
         this.Products = r;

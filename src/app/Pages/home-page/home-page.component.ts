@@ -58,8 +58,17 @@ export class HomePageComponent implements OnInit {
     obj.quantity = 1;
 
     if (this.loggedIn === null) {
-      alert('Login Or Create an Account First');
-      this.router.navigate(['/login']);
+      // alert('Login Or Create an Account First');
+      // this.router.navigate(['/login']);
+
+      if (f === 'formWishList') {
+        console.log('Clicked');
+       localStorage.setItem("formWishList", obj);
+        
+      } else if (f === 'formCard') {
+        localStorage.setItem("formCard", obj);
+      }
+      
     } else {
       if (f === 'formWishList') {
         console.log('Clicked');

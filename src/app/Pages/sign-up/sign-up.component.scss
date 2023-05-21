@@ -7,4 +7,19 @@
   [type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
   }
+
+
+
+  .icon-d {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
   
+  #logo-button:hover .icon-d {
+    opacity: 1;
+  }

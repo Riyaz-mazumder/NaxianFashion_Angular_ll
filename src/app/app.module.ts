@@ -30,6 +30,10 @@ import { AproveOrderComponent } from './admin/Tables/order/aprove-order/aprove-o
 import { AllUserComponent } from './admin/Tables/users/all-user/all-user.component';
 import { AllProductBySearchedComponent } from './Pages/all-product-by-searched/all-product-by-searched.component';
 import { UserDetailsComponent } from './Pages/user-details/user-details.component';
+import { TryOnSunglassComponent } from './Pages/try-on-sunglass/try-on-sunglass.component';
+import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
+import { ConfrmeEmailComponent } from './Pages/confrme-email/confrme-email.component';
+import { EmailConfremedComponent } from './Pages/email-confremed/email-confremed.component';
 
 
 
@@ -58,6 +62,10 @@ import { UserDetailsComponent } from './Pages/user-details/user-details.componen
     AllUserComponent,
     AllProductBySearchedComponent,
     UserDetailsComponent,
+    TryOnSunglassComponent,
+    TermsAndConditionComponent,
+    ConfrmeEmailComponent,
+    EmailConfremedComponent,
   
   ],
   imports: [

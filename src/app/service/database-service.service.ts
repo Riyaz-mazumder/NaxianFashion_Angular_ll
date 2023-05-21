@@ -11,11 +11,15 @@ export class DatabaseServiceService {
     'https://naxianfashion-931b6-default-rtdb.asia-southeast1.firebasedatabase.app/Products.json';
 
   // Products Table
-  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
+  // private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
+  // changed
+  private url = 'http://localhost:8080/api/v1/products';
 
 
   searchProducts(data: string){
-    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
+    // return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
+    // changed
+    return this.http.get("http://localhost:8080/api/v1/product" + data)
   }
 
   addNewProduct(data: any) {
@@ -45,7 +49,8 @@ export class DatabaseServiceService {
   }
 
   /// User Account
-  uUrl = 'http://localhost:3000/userRegistration';
+  uUrl = 'http://localhost:8080/api/v1/customers';
+
   addUser(data: any) {
     return this.http.post(this.uUrl, data);
   }
@@ -59,11 +64,13 @@ export class DatabaseServiceService {
     return this.http.get(this.uUrl + '/' + id);
   }
   editUser(id: any, newData: any) {
-    return this.http.put(this.uUrl + '/' + id, newData);
+    return this.http.put(this.uUrl, newData);
   }
 
   // Orders
-  oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  // oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  // changed
+  oUrl = 'http://localhost:8080/api/v1/orders';
   addOrder(data: any) {
     return this.http.post(this.oUrl, data);
   }

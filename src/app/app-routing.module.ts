@@ -18,6 +18,8 @@ import { AllUserComponent } from './admin/Tables/users/all-user/all-user.compone
 import { ShowOrderComponent } from './admin/Tables/order/show-order/show-order.component';
 import { AllProductBySearchedComponent } from './Pages/all-product-by-searched/all-product-by-searched.component';
 import { UserDetailsComponent } from './Pages/user-details/user-details.component';
+import { TryOnSunglassComponent } from './Pages/try-on-sunglass/try-on-sunglass.component';
+import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'productView/:id', component: ProductViewPageComponent },
   { path: 'user/:id/shopingView', component: ShoptinCartComponent },
   { path: 'search/:word', component: AllProductBySearchedComponent},
+  { path: 'tryOnGless/:id', component: TryOnSunglassComponent},
+  { path: 'term', component: TermsAndConditionComponent},
 
   { path: 'userPropile/:id', component: UserDetailsComponent},
 

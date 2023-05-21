@@ -2,3 +2,40 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+ 
+/* CSS for the message box */
+.message-box {
+    position: fixed;
+    top: 6.25em;
+    right: 4.375em;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+  }
+  
+  .message-text {
+    color: green;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .message-cross {
+    color: #999999;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .message-tick {
+    color: blue;
+  }
+
+
+  input.ng-invalid.ng-touched{
+    border: 1px solid red;
+  }
+
+
+  

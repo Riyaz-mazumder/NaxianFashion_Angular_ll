@@ -16,6 +16,7 @@ export class LogInComponent implements OnInit {
     private router: Router
   ) {}
 
+
   allUser!: any;
   ngOnInit(): void {
     this.service.getAllUsers().subscribe({
@@ -28,20 +29,41 @@ export class LogInComponent implements OnInit {
     });
   }
 
+  message:string = "";
+
   formSubmit(data: NgForm) {
     console.log(data.value);
     console.log(this.allUser);
 
     let foundUser = this.allUser.find((e: any) => {
-      return e.name === data.value.name && e.password === data.value.password;
+      return e.email === data.value.email && e.password === data.value.password;
     });
+
 
     if (foundUser) {
       this.authService.saveUser(foundUser);
-      alert('Welcome Back ' + data.value.name + ' ! ❤️');
+
+      this.message = "Welcome Back ' + data.value.name + ' ! ❤️"
+
       this.router.navigate(['/home']);
+
     } else {
-      alert('User Name Or Password Is InCorrect..');
+      this.message = 'User Name Or Password Is InCorrect..'
+      alert( 'User Name Or Password Is InCorrect..')
     }
+  }
+
+  
+  showMessageFlag: boolean = false;
+
+
+  closeMessage() {
+    this.showMessageFlag = false;
+  }
+  showMessage() {
+    this.showMessageFlag = true;
+    setTimeout(() => {
+      this.showMessageFlag = false;
+    }, 3000);
   }
 }

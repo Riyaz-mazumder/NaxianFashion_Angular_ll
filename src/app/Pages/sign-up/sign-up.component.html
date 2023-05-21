@@ -1,4 +1,13 @@
-<section class="vh-100" style="background-color: #eee">
+<section class="vh-100" style="background-color: #eee; margin-bottom: 300px;">
+
+  <!-- HTML for the message box -->
+<div *ngIf="showMessageFlag" class="message-box">
+  <span class="message-text">User Has been Created &#10004;</span>
+ 
+  <span (click)="closeMessage()" style="font-size: 1.5em;" class="message-cross">&times;</span>
+</div>
+<!-- end of message box -->
+
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -20,10 +29,15 @@
                         type="text"
                         id="form3Example1c"
                         class="form-control"
+                        required
+                        #name="ngModel"
                       />
                       <label class="form-label" for="form3Example1c"
                         >Your Name</label
                       >
+                      <div style="color: red;" *ngIf="!name.valid && email.touched" class="error-message">
+                        Name Field is Empty
+                      </div>
                     </div>
                   </div>
 
@@ -31,16 +45,24 @@
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input
+                      id="name"
                         ngModel
                         name="email"
                         type="email"
                         id="form3Example3c"
                         class="form-control"
+                        email
+                        required
+                        #email="ngModel"
                       />
                       <label class="form-label" for="form3Example3c"
                         >Your Email</label
                       >
+                      <div style="color: red;" *ngIf="!email.valid && email.touched" class="error-message">
+                        Email is Not Valid
+                      </div>
                     </div>
+                   
                   </div>
 
                   <div class="d-flex flex-row align-items-center mb-4">
@@ -96,26 +118,32 @@
                         type="password"
                         id="form3Example4c"
                         class="form-control"
+                        required
+                        #password="ngModel"
                       />
                       <label class="form-label" for="form3Example4c"
-                        >Password</label
+                        >Password must be 6 characters long or more</label
                       >
+                      <div style="color: red;" *ngIf="!password.valid && email.touched" class="error-message">
+                        Email Feald is Empty
+                      </div>
                     </div>
                   </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
+                  <!-- <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input
                         type="password"
                         id="form3Example4cd"
                         class="form-control"
+
                       />
                       <label class="form-label" for="form3Example4cd"
                         >Repeat your password</label
                       >
                     </div>
-                  </div>
+                  </div> -->
                   <div>
                     <input type="hidden" ngModel name="card" value="[]" />
                     <input type="hidden" ngModel name="wishList" value="[]" />
@@ -127,16 +155,18 @@
                       type="checkbox"
                       value=""
                       id="form2Example3c"
+                      required
                     />
                     <label class="form-check-label" for="form2Example3">
                       I agree all statements in
-                      <a href="#!">Terms of service</a>
+                      <a routerLink="/term">Terms of service</a>
                     </label>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg">
+                    <button [disabled]="!f.valid" (click)="showMessage()" type="submit" class="btn btn-primary btn-lg" id="logo-button">
                       Register
+                      <!-- <span class="icon-d">&#128683;</span> -->
                     </button>
                   </div>
                 </form>
@@ -156,4 +186,6 @@
       </div>
     </div>
   </div>
+  
+  
 </section>
