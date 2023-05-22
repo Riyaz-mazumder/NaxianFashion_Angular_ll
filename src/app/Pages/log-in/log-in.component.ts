@@ -44,6 +44,7 @@ export class LogInComponent implements OnInit {
       this.authService.saveUser(foundUser);
 
       this.message = "Welcome Back ' + data.value.name + ' ! ❤️"
+      this.showMessage();
 
       this.router.navigate(['/home']);
 
@@ -57,10 +58,10 @@ export class LogInComponent implements OnInit {
   showMessageFlag: boolean = false;
 
 
-  closeMessage() {
+public  closeMessage() {
     this.showMessageFlag = false;
   }
-  showMessage() {
+ public showMessage() {
     this.showMessageFlag = true;
     setTimeout(() => {
       this.showMessageFlag = false;

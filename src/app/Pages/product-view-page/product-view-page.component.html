@@ -1,4 +1,11 @@
 <div class="holder">
+   <!-- HTML for the message box -->
+   <div *ngIf="showMessageFlag" class="message-box">
+    <span class="message-text">{{message}} &#10004;</span>
+   
+    <span (click)="closeMessage()" style="font-size: 1.5em;" class="message-cross">&times;</span>
+  </div>
+  <!-- end of message box -->
   <div class="product-card">
     <div class="image-container">
       <div class="cover-image product-image">
@@ -30,6 +37,15 @@
         <i class="fa fa-plus"></i>
         <span> Buy Now</span>
       </a>
+
+      <a id="tryOn"
+      *ngIf="productIndividual.subCate === 'Glasses'"
+      (click)="gotToTryOnGlesses(productIndividual.id, productIndividual.name)"
+      class="add-to-cart"
+      style="cursor: pointer"
+    >
+      <span>Virtual TryOn</span>
+    </a>
       <div class="sss">
         <form>
           <div class="size_color">
@@ -69,10 +85,10 @@
         </p>
       </div>
       <div class="buttons">
-        <a class="button card" id="card" style="margin-right: 20px">
+        <a (click)="shopping('formCard', productIndividual)" class="button card" id="card" style="margin-right: 20px">
           <span> Add to cart</span>
         </a>
-        <a class="button card" id="card">
+        <a (click)="shopping('formWishList', productIndividual)" class="button card" id="card">
           <span> Add to wishlist</span>
         </a>
       </div>

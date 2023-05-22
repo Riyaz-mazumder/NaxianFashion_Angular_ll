@@ -1,0 +1,26 @@
+<div style="margin-top: 120px; display: grid; place-items: center; margin-bottom: 100px;">
+    <h2 >Track My Order</h2>
+
+    <form class="form-inline" class="serch_f" (ngSubmit)="searchProducts(f)" #f="ngForm">
+        <input
+        ngModel
+        name="search"
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button type="submit" class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+          <span style="margin-right: 5px">Search</span>
+          <i
+            style="display: inline"
+            class="fa fa-search"
+            aria-hidden="true"
+          ></i>
+        </button>
+      </form>
+
+      
+</div>
+
+

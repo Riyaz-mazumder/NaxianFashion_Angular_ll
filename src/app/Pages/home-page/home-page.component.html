@@ -1,5 +1,12 @@
 <div style="margin-top: 90px"></div>
 
+  <!-- HTML for the message box -->
+  <div *ngIf="showMessageFlag" class="message-box">
+    <span class="message-text">{{message}} &#10004;</span>
+   
+    <span (click)="closeMessage()" style="font-size: 1.5em;" class="message-cross">&times;</span>
+  </div>
+  <!-- end of message box -->
 <!-- navigation start -->
 <div class="categories">
   <div class="category">

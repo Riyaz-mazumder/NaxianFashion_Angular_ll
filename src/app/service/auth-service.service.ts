@@ -24,4 +24,14 @@ export class AuthServiceService {
       return null;
     }
   }
+
+  glassLink: string = "";
+
+ public setThetryOnGlassLink(link: string){
+    this.glassLink = link;
+  }
+
+  public getThetryOnGlassLink(){
+    return this.glassLink;
+  }
 }

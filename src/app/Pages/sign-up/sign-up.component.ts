@@ -54,6 +54,7 @@ export class SignUpComponent implements OnInit{
     this.service.addUser(d.value).subscribe({
       next: (r) => {
         d.reset();
+        this.showMessage();
         this.router.navigate(['/login']);
       },
       error: (e) => {
@@ -72,10 +73,10 @@ export class SignUpComponent implements OnInit{
   showMessageFlag: boolean = false;
 
 
-  closeMessage() {
+ public closeMessage() {
     this.showMessageFlag = false;
   }
-  showMessage() {
+ public showMessage() {
     this.showMessageFlag = true;
     setTimeout(() => {
       this.showMessageFlag = false;

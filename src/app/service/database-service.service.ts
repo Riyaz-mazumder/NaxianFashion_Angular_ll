@@ -43,7 +43,8 @@ export class DatabaseServiceService {
   }
 
   // Admin Table
-  urlAdminLogin = 'http://localhost:3000/adminLogin';
+  urlAdminLogin = 'http://localhost:8080/api/v1/admins';
+
   getAdminCredential() {
     return this.http.get(this.urlAdminLogin);
   }

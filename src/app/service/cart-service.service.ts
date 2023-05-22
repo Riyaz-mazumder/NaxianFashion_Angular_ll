@@ -15,6 +15,13 @@ export class CartServiceService {
     return this.http.get(this.urlOfCart);
   }
 
+  cartLength!: any;
+
+  public getAllFromCartLength(){
+    this.cartLength = this.getAllFromCart();
+    return this.cartLength.length;
+  }
+
   public addToCart(d: any) {
     return this.http.post(this.urlOfCart, d);
   }
@@ -28,4 +35,47 @@ export class CartServiceService {
   public getById(id: number){
     return this.http.get(this.urlOfCart + '/' + id);
   }
+
+
+  public getAllCartItemsFromLocalStroage(): any[] {
+    const items = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.includes('formCard_')) {
+        const value = localStorage.getItem(key);
+        if (value) {
+          const parsedValue = JSON.parse(value);
+          items.push(parsedValue);
+        }
+      }
+    }
+    return items;
+  }
+
+  public getAllWishListItemsFromLocalStroage(): any[] {
+    const items = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.includes('formWishList_')) {
+        const value = localStorage.getItem(key);
+        if (value) {
+          const parsedValue = JSON.parse(value);
+          items.push(parsedValue);
+        }
+      }
+    }
+    return items;
+  }
+
+  cartLocalLength!: any;
+  wishListLength!: any;
+
+ public getAllCartItemsFromLocalStroageLength(){
+   return this.cartLocalLength = this.getAllCartItemsFromLocalStroage().length;
+  }
+
+  public getAllWishListItemsLength(){
+    return this.wishListLength = this.getAllWishListItemsFromLocalStroage().length;
+
+    }
 }

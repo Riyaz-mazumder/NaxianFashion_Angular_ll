@@ -88,18 +88,27 @@ export class ShoptinCartComponent implements OnInit {
     this.loggedIn = this.authService.getUser();
     console.log(JSON.parse(this.loggedIn));
     
+    if(this.loggedIn === null){
 
-    this.service.getAllFromCart().subscribe({
-      next: (r) => {
-        this.Products = r;
-      },
-      error: (e) => {
-        alert(e);
-      },
-    });
-    this.calculateTotalValue();
-    this.calculateTotalItems();
-  }
+      this.Products = this.service.getAllCartItemsFromLocalStroage();
+      this.calculateTotalValue();
+      this.calculateTotalItems();
+      
+    }else{
+      this.service.getAllFromCart().subscribe({
+        next: (r) => {
+          this.Products = r;
+        },
+        error: (e) => {
+          alert(e);
+        },
+      });
+      this.calculateTotalValue();
+      this.calculateTotalItems();
+    }
+    }
+
+    
 
   productQuantity!: number;
   totalValue: number = 0;

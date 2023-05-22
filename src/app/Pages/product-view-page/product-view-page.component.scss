@@ -87,6 +87,15 @@ img:hover {
   box-shadow: #e2e9f3 0 5px;
   margin: 20px 0;
 }
+#tryOn{
+  width: 60%;
+  font-size: 15px;
+  padding: 12px;
+ margin-left: 20%;
+ background-color: green;
+}
+
+
 .add-to-cart ion-icon {
   font-size: 30px;
   margin-bottom: -8px;
@@ -94,6 +103,10 @@ img:hover {
 .add-to-cart:hover {
   background: #e2e9f3;
   box-shadow: #191847 0 5px;
+  color: #191847;
+}
+#tryOn:hover {
+  background: #e2e9f3;
   color: #191847;
 }
 .add-to-cart:hover ion-icon {

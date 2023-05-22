@@ -41,65 +41,114 @@ export class NavbarComponent implements OnInit {
   products!: any;
   wishListProducts!: any;
   ngOnInit(): void {
+    console.log(this.authService.getUser());
+    this.loggedIn = this.authService.getUser();
+    
+    // this.userName = JSON.parse(this.loggedIn).name;
+
+    if(this.loggedIn === null){
+
+      console.log(this.cartService.getAllCartItemsFromLocalStroage());
+
+      this.products = this.cartService.getAllCartItemsFromLocalStroage();
+      this.cartItems = this.cartService.getAllCartItemsFromLocalStroageLength();
+
+      this.wishListProducts = this.cartService.getAllWishListItemsFromLocalStroage();
+      this.wishListItems = this.cartService.getAllWishListItemsLength();   
+      
+    }else{
+
+      this.cartService.addToCart(this.cartService.getAllCartItemsFromLocalStroage).subscribe({
+      next(value) {
+        console.log(value);
+        for (var key in localStorage) {
+          if (key.includes("formCard_")) {
+            localStorage.removeItem(key);
+          }
+        }    
+      },error(err) {
+        console.log(err);
+        
+      },
+      })
+
     this.cartService.getAllFromCart().subscribe({
       next: (r) => {
         this.products = r;
-        this.cartItems = this.products.length;
+        this.cartItems = this.cartService.getAllCartItemsFromLocalStroageLength();
       },
       error: (e) => {
         alert(e);
       },
     });
+
+    this.wishListService.addToWishList(this.cartService.getAllWishListItemsFromLocalStroage()).subscribe({
+      next(value) {
+        console.log(value);
+
+        for (var key in localStorage) {
+          if (key.includes("formWishList_")) {
+            localStorage.removeItem(key);
+          }
+        }
+        
+        
+      },
+    })};
 
     this.wishListService.getAllWishList().subscribe({
       next: (r) => {
         this.wishListProducts = r;
-        this.wishListItems = this.wishListProducts.length;
+        this.wishListItems = this.cartService.getAllWishListItemsLength(); 
       },
       error: (e) => {
         alert(e);
       },
     });
 
-    // logIn
-    this.loggedIn = this.authService.getUser();
-    this.userName = JSON.parse(this.loggedIn).name;
-
-    // the the user
-    this.service.getTheUser(JSON.parse(this.loggedIn).id).subscribe({
+     // the the user
+     this.service.getTheUser(JSON.parse(this.loggedIn).id).subscribe({
       next: (r) => {
         this.theUser = r;
+        console.log(r);
+        console.log(this.theUser);
+        
       },
       error: (e) => {
         console.log(e);
       },
     });
 
-    //add to card
   }
 
-  deleteUser() {
-    sessionStorage.removeItem(this.authService.USER_KEY);
-    alert('You Have Logged Out: ');
-  }
 
-  onAddToCart(d: any) {
-    const dialogRef = this.dialog.open(ShoptinCartComponent, {
-      data: d,
-    });
-  }
+// add to cart
 
-  onAddToWishlist(d: any) {
-    const dialogRef = this.dialog.open(WishListPageComponent, {
-      data: d,
-    });
-  }
-
-  goToUrPropile(){
-    console.log(this.authService.getUser());
-    console.log(JSON.parse(this.loggedIn));
-    
-    
-    this.router.navigate(["/userPropile/" + JSON.parse(this.loggedIn).name])
-  }
+deleteUser() {
+  sessionStorage.removeItem(this.authService.USER_KEY);
+  alert('You Have Logged Out: ');
 }
+
+onAddToCart(d: any) {
+  const dialogRef = this.dialog.open(ShoptinCartComponent, {
+    data: d,
+  });
+}
+
+onAddToWishlist(d: any) {
+  const dialogRef = this.dialog.open(WishListPageComponent, {
+    data: d,
+  });
+}
+
+goToUrPropile(){
+  console.log(this.authService.getUser());
+  console.log(JSON.parse(this.loggedIn));
+  
+  
+  this.router.navigate(["/userPropile/" + JSON.parse(this.loggedIn).name])
+}
+  
+}
+
+

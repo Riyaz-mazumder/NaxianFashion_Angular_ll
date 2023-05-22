@@ -20,6 +20,8 @@ import { AllProductBySearchedComponent } from './Pages/all-product-by-searched/a
 import { UserDetailsComponent } from './Pages/user-details/user-details.component';
 import { TryOnSunglassComponent } from './Pages/try-on-sunglass/try-on-sunglass.component';
 import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
+import { TrackMyOrderDetailsComponent } from './Pages/track-my-order-details/track-my-order-details.component';
+import { TrackMyOrderComponent } from './Pages/track-my-order/track-my-order.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -30,10 +32,11 @@ const routes: Routes = [
   { path: 'productView/:id', component: ProductViewPageComponent },
   { path: 'user/:id/shopingView', component: ShoptinCartComponent },
   { path: 'search/:word', component: AllProductBySearchedComponent},
-  { path: 'tryOnGless/:id', component: TryOnSunglassComponent},
+  { path: 'tryOn/glessId/:id', component: TryOnSunglassComponent},
   { path: 'term', component: TermsAndConditionComponent},
-
   { path: 'userPropile/:id', component: UserDetailsComponent},
+  { path: 'trackOrder', component: TrackMyOrderComponent},
+  { path: 'trackOrder/details/:id', component: TrackMyOrderDetailsComponent},
 
   { path: 'admin', component: AdminLoginComponent },
   {

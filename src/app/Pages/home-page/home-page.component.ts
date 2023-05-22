@@ -54,19 +54,27 @@ export class HomePageComponent implements OnInit {
 
   // Shopping Card Clicked
   shopping(f: string, obj: any) {
-    obj.id = null;
+    // obj.id = null;
     obj.quantity = 1;
 
     if (this.loggedIn === null) {
       // alert('Login Or Create an Account First');
       // this.router.navigate(['/login']);
 
+
       if (f === 'formWishList') {
         console.log('Clicked');
-       localStorage.setItem("formWishList", obj);
+        this.message = "Added To Your WishList";
+        localStorage.setItem("formWishList_" + obj.id.toString(), JSON.stringify(obj));
+
+        this.showMessage();
+        
         
       } else if (f === 'formCard') {
-        localStorage.setItem("formCard", obj);
+        this.message = "Added To Your Cart";
+        localStorage.setItem("formCard_" + obj.id.toString(), JSON.stringify(obj));
+        this.showMessage()
+
       }
       
     } else {
@@ -96,4 +104,20 @@ export class HomePageComponent implements OnInit {
       }
     }
   }
+
+
+  showMessageFlag: boolean = false;
+
+public  message: string = "";
+
+ public closeMessage() {
+    this.showMessageFlag = false;
+  }
+public showMessage() {
+    this.showMessageFlag = true;
+    setTimeout(() => {
+      this.showMessageFlag = false;
+    }, 3000);
+  }
+
 }
