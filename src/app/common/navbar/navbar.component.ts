@@ -9,6 +9,7 @@ import { WishListServiceService } from 'src/app/service/wish-list-service.servic
 import { NgForm } from '@angular/forms';
 import { SearchSearviceService } from 'src/app/service/search-searvice.service';
 import { Router } from '@angular/router';
+import { ShareDataService } from 'src/app/service/share-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit {
     private cartService: CartServiceService,
     private wishListService: WishListServiceService,
     private searchService: SearchSearviceService,
-    private router: Router
+    private router: Router,
+    private sharedService: ShareDataService,
   ) {}
 
   searchedProducts!:any;
@@ -40,6 +42,15 @@ export class NavbarComponent implements OnInit {
   theUser!: any;
   products!: any;
   wishListProducts!: any;
+  allProductsFromCart!: any;
+
+
+  ngAfterViewInit() {
+    this.sharedService.ngOnInitTriggered$.subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
   ngOnInit(): void {
     console.log(this.authService.getUser());
     this.loggedIn = this.authService.getUser();
@@ -51,10 +62,10 @@ export class NavbarComponent implements OnInit {
       console.log(this.cartService.getAllCartItemsFromLocalStroage());
 
       this.products = this.cartService.getAllCartItemsFromLocalStroage();
-      this.cartItems = this.cartService.getAllCartItemsFromLocalStroageLength();
+      this.cartItems = this.products.length;
 
       this.wishListProducts = this.cartService.getAllWishListItemsFromLocalStroage();
-      this.wishListItems = this.cartService.getAllWishListItemsLength();   
+      this.wishListItems = this.wishListProducts.length;   
       
     }else{
 
@@ -130,15 +141,78 @@ deleteUser() {
 }
 
 onAddToCart(d: any) {
-  const dialogRef = this.dialog.open(ShoptinCartComponent, {
-    data: d,
-  });
+
+  this.loggedIn = this.authService.getUser();
+    if(this.loggedIn === null){
+
+      if( this.cartService.getAllCartItemsFromLocalStroage().length === 0){
+        this.message = "The Cart is empty";
+        this.showMessage();
+      }else{
+        const dialogRef = this.dialog.open(ShoptinCartComponent, {
+          data: d,
+        });
+      }
+
+    }else{
+      this.cartService.getAllFromCart().subscribe({
+        next: (r) => {
+          this.allProductsFromCart = r;
+        },
+        error: (e) => {
+          alert(e);
+        },
+      });
+      if(this.allProductsFromCart.length == 0){
+        this.message = "The Cart is empty";
+        this.showMessage();
+      }else{
+        const dialogRef = this.dialog.open(ShoptinCartComponent, {
+          data: d,
+        });
+      }
+
+
+    }
+  
+ 
 }
 
 onAddToWishlist(d: any) {
-  const dialogRef = this.dialog.open(WishListPageComponent, {
-    data: d,
-  });
+  
+  this.loggedIn = this.authService.getUser();
+
+    if(this.loggedIn === null){
+
+      if( this.cartService.getAllWishListItemsFromLocalStroage().length === 0){
+        this.message = "The WishList is empty";
+        this.showMessage();
+      }else{
+        const dialogRef = this.dialog.open(WishListPageComponent, {
+          data: d,
+        });
+      }
+
+    }else{
+      this.cartService.getAllFromCart().subscribe({
+        next: (r) => {
+          this.allProductsFromCart = r;
+        },
+        error: (e) => {
+          alert(e);
+        },
+      });
+      if(this.allProductsFromCart.length == 0){
+        this.message = "The WishList is empty";
+        this.showMessage();
+      }else{
+        const dialogRef = this.dialog.open(WishListPageComponent, {
+          data: d,
+        });
+      }
+    }
+  
+ 
 }
 
 goToUrPropile(){
@@ -148,6 +222,20 @@ goToUrPropile(){
   
   this.router.navigate(["/userPropile/" + JSON.parse(this.loggedIn).name])
 }
+
+showMessageFlag: boolean = false;
+
+public  message: string = "";
+
+ public closeMessage() {
+    this.showMessageFlag = false;
+  }
+public showMessage() {
+    this.showMessageFlag = true;
+    setTimeout(() => {
+      this.showMessageFlag = false;
+    }, 3000);
+  }
   
 }
 

@@ -8,6 +8,8 @@ import { CheckOutPageComponent } from '../check-out-page/check-out-page.componen
 import { CartServiceService } from 'src/app/service/cart-service.service';
 import { NgForm } from '@angular/forms';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { ShareDataService } from 'src/app/service/share-data.service';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-shoptin-cart',
@@ -24,12 +26,21 @@ export class ShoptinCartComponent implements OnInit {
     private dialogRef: MatDialogRef<ShoptinCartComponent>,
     private service: CartServiceService,
     private authService: AuthServiceService,
+    private cartService: CartServiceService,
+    private sharedService:ShareDataService,
+    private router: Router,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.allCartProducts = data;
-  }
 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.dialog.closeAll(); // Close all open dialogs when navigation starts
+      }
+    });
+  }
+  public  message: string = "";
    couponCodeProduct!: any;
 
   couponCodeApply( data: NgForm, d:any){
@@ -67,6 +78,8 @@ export class ShoptinCartComponent implements OnInit {
 
   updateQuantity(index: number, d: any, quantity: number) {
     d.productQuantity = quantity;
+
+    // possible change
     this.service.updateCart(d).subscribe({
       next: (r) => {
         console.log(r);
@@ -82,6 +95,7 @@ export class ShoptinCartComponent implements OnInit {
     this.ngOnInit();
   }
   Products!: any;
+
   ngOnInit(): void {
 
     console.log(this.authService.getUser());
@@ -124,20 +138,42 @@ export class ShoptinCartComponent implements OnInit {
     this.totalItems = this.Products.length;
   }
 
-  cardProductRemove(id: number) {
-    console.log(id);
 
-    // cardProductRemoveQuery;
+  
+  cardProductRemove(id: number) {
+
+    this.loggedIn = this.authService.getUser();
+    
+
+    if(this.loggedIn === null){
+       this.cartService.removeCartItemFromLommcalStorage(id.toString());
+       this.calculateTotalValue();
+       this.calculateTotalItems();
+       this.ngOnInit();
+       this.sharedService.triggerOnInit();
+       this.message = "Removed From Cart"
+       this.showMessage();
+
+    }else{
+      // cardProductRemoveQuery;
     this.service.deleteFromCart(id).subscribe({
       next: (r) => {
-        alert('Remove From Cart');
+        this.calculateTotalValue();
+        this.calculateTotalItems();
         this.ngOnInit();
+       this.sharedService.triggerOnInit();
+       this.message = "Removed From Cart"
+       this.showMessage();
       },
       error: (e) => {
         console.log(e);
       },
     });
   }
+
+    }
+
+    
 
   productsInCart: any;
 
@@ -146,9 +182,20 @@ export class ShoptinCartComponent implements OnInit {
     const dialogRefs = this.dialog.open(CheckOutPageComponent, {
       data: this.Products,
     });
+  }
 
-    // dialogRefs.afterClosed().subscribe((result) => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+
+  showMessageFlag: boolean = false;
+
+
+
+ public closeMessage() {
+    this.showMessageFlag = false;
+  }
+public showMessage() {
+    this.showMessageFlag = true;
+    setTimeout(() => {
+      this.showMessageFlag = false;
+    }, 3000);
   }
 }

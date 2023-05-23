@@ -2,9 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { NavbarComponent } from 'src/app/common/navbar/navbar.component';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { CartServiceService } from 'src/app/service/cart-service.service';
 import { DatabaseServiceService } from 'src/app/service/database-service.service';
+import { ShareDataService } from 'src/app/service/share-data.service';
 import { WishListServiceService } from 'src/app/service/wish-list-service.service';
 
 @Component({
@@ -19,7 +21,8 @@ export class HomePageComponent implements OnInit {
     private router: Router,
     private cartService: CartServiceService,
     private wishListService: WishListServiceService,
-    private http: HttpClient
+    private http: HttpClient,
+    private sharedService: ShareDataService,
   ) {}
 
   // This One
@@ -58,33 +61,32 @@ export class HomePageComponent implements OnInit {
     obj.quantity = 1;
 
     if (this.loggedIn === null) {
-      // alert('Login Or Create an Account First');
-      // this.router.navigate(['/login']);
-
-
       if (f === 'formWishList') {
-        console.log('Clicked');
-        this.message = "Added To Your WishList";
+
         localStorage.setItem("formWishList_" + obj.id.toString(), JSON.stringify(obj));
 
+        this.sharedService.triggerOnInit();
+        this.message = "Added To Your WishList";
         this.showMessage();
         
         
       } else if (f === 'formCard') {
-        this.message = "Added To Your Cart";
+
         localStorage.setItem("formCard_" + obj.id.toString(), JSON.stringify(obj));
-        this.showMessage()
+
+        this.sharedService.triggerOnInit();
+        this.message = "Added To Your Cart";
+        this.showMessage();
 
       }
       
     } else {
       if (f === 'formWishList') {
-        console.log('Clicked');
-
         this.wishListService.addToWishList(obj).subscribe({
           next: (r) => {
-            alert('Added To Your Wishlist');
-            this.ngOnInit();
+            this.sharedService.triggerOnInit();
+            this.message = "Added To Your WishList";
+            this.showMessage();
           },
           error: (e) => {
             alert(e);
@@ -93,8 +95,9 @@ export class HomePageComponent implements OnInit {
       } else if (f === 'formCard') {
         this.cartService.addToCart(obj).subscribe({
           next: (r) => {
-            alert('Added To Your Cart');
-            this.ngOnInit();
+            this.sharedService.triggerOnInit();
+            this.message = "Added To Your Cart";
+            this.showMessage();
           },
           error: (e) => {
             alert(e);

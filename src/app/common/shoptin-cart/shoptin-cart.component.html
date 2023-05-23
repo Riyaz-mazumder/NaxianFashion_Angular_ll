@@ -1,3 +1,12 @@
+
+  <!-- HTML for the message box -->
+  <div *ngIf="showMessageFlag" class="message-box">
+    <span class="message-text">{{message}} &#10004;</span>
+   
+    <span (click)="closeMessage()" style="font-size: 1.5em;" class="message-cross">&times;</span>
+  </div>
+  <!-- end of message box -->
+
 <section class="h-100 h-custom section" style="background-color: #d2c9ff">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">

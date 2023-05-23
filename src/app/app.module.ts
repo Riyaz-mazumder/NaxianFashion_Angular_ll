@@ -37,6 +37,7 @@ import { EmailConfremedComponent } from './Pages/email-confremed/email-confremed
 import { TrackMyOrderComponent } from './Pages/track-my-order/track-my-order.component';
 import { TrackMyOrderDetailsComponent } from './Pages/track-my-order-details/track-my-order-details.component';
 import { AddTrackingComponent } from './admin/add-tracking/add-tracking.component';
+import { MessageServiceComponent } from './service/message-service/message-service.component';
 
 
 
@@ -73,6 +74,7 @@ import { AddTrackingComponent } from './admin/add-tracking/add-tracking.componen
     TrackMyOrderComponent,
     TrackMyOrderDetailsComponent,
     AddTrackingComponent,
+    MessageServiceComponent,
   
   ],
   imports: [

@@ -7,17 +7,14 @@ import { Injectable } from '@angular/core';
 export class DatabaseServiceService {
   constructor(private http: HttpClient) {}
 
-  private productUrl =
-    'https://naxianfashion-931b6-default-rtdb.asia-southeast1.firebasedatabase.app/Products.json';
-
-  // Products Table
-  // private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
+ // Products Table
+  //private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
   // changed
-  private url = 'http://localhost:8080/api/v1/products';
+   private url = 'http://localhost:8080/api/v1/products';
 
 
   searchProducts(data: string){
-    // return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
+    //return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
     // changed
     return this.http.get("http://localhost:8080/api/v1/product" + data)
   }
@@ -44,6 +41,8 @@ export class DatabaseServiceService {
 
   // Admin Table
   urlAdminLogin = 'http://localhost:8080/api/v1/admins';
+  // urlAdminLogin = 'https://juicy-camera-production.up.railway.app/v1/admins';
+
 
   getAdminCredential() {
     return this.http.get(this.urlAdminLogin);
@@ -51,6 +50,8 @@ export class DatabaseServiceService {
 
   /// User Account
   uUrl = 'http://localhost:8080/api/v1/customers';
+  // uUrl = 'https://juicy-camera-production.up.railway.app/v1/customers';
+  // 
 
   addUser(data: any) {
     return this.http.post(this.uUrl, data);
