@@ -33,17 +33,15 @@ export class HomePageComponent implements OnInit {
   theUser!: any;
 
   ngOnInit() {
-    console.log(this.authService.getUser());
     this.loggedIn = this.authService.getUser();
-    console.log(JSON.parse(this.loggedIn));
 
     this.service.getAllProducts().subscribe({
       next: (r) => {
         this.allProducts = r;
       },
       error: (err) => {
-        alert(err);
-        console.log(err);
+        this.message = "Somthing Went Wrong, If You See This Plese Report Us";
+        this.showMessage();
       },
     });
   }
@@ -89,7 +87,9 @@ export class HomePageComponent implements OnInit {
             this.showMessage();
           },
           error: (e) => {
-            alert(e);
+            this.message = "Somthing Went Wrong, Plese Contact Us";
+             this.showMessage();
+             this.ngOnInit();
           },
         });
       } else if (f === 'formCard') {
@@ -100,10 +100,11 @@ export class HomePageComponent implements OnInit {
             this.showMessage();
           },
           error: (e) => {
-            alert(e);
+            this.message = "Somthing Went Wrong, Plese Contact Us";
+            this.showMessage();
+            this.ngOnInit();
           },
         });
-        console.log('Clicked');
       }
     }
   }
