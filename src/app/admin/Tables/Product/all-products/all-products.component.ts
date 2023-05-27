@@ -19,12 +19,14 @@ export class AllProductsComponent implements OnInit {
     this.service.getAllProducts().subscribe({
       next: (r) => {
         this.allProducts = r;
+        this.allProducts.content.reverse();
       },
       error: (err) => {
         alert(err);
         console.log(err);
       },
     });
+    
   }
 
   onUpdate(d: any) {

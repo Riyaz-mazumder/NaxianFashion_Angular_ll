@@ -7,16 +7,19 @@ import { Injectable } from '@angular/core';
 export class DatabaseServiceService {
   constructor(private http: HttpClient) {}
 
+  public productPage = '';
+
+
  // Products Table
-  //private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
+  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products?page=' + this.productPage;
   // changed
-   private url = 'http://localhost:8080/api/v1/products';
+  //  private url = 'http://localhost:8080/api/v1/products';
 
 
   searchProducts(data: string){
-    //return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
+    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
     // changed
-    return this.http.get("http://localhost:8080/api/v1/product" + data)
+    // return this.http.get("http://localhost:8080/api/v1/product" + data)
   }
 
   addNewProduct(data: any) {
@@ -40,8 +43,8 @@ export class DatabaseServiceService {
   }
 
   // Admin Table
-  urlAdminLogin = 'http://localhost:8080/api/v1/admins';
-  // urlAdminLogin = 'https://juicy-camera-production.up.railway.app/v1/admins';
+  // urlAdminLogin = 'http://localhost:8080/api/v1/admins';
+  urlAdminLogin = 'https://juicy-camera-production.up.railway.app/v1/admins';
 
 
   getAdminCredential() {
@@ -49,8 +52,8 @@ export class DatabaseServiceService {
   }
 
   /// User Account
-  uUrl = 'http://localhost:8080/api/v1/customers';
-  // uUrl = 'https://juicy-camera-production.up.railway.app/v1/customers';
+  // uUrl = 'http://localhost:8080/api/v1/customers';
+  uUrl = 'https://juicy-camera-production.up.railway.app/v1/customers';
   // 
 
   addUser(data: any) {
@@ -70,9 +73,9 @@ export class DatabaseServiceService {
   }
 
   // Orders
-  // oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
   // changed
-  oUrl = 'http://localhost:8080/api/v1/orders';
+  // oUrl = 'http://localhost:8080/api/v1/orders';
   addOrder(data: any) {
     return this.http.post(this.oUrl, data);
   }

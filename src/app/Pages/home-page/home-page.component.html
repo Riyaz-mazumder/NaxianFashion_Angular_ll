@@ -1,3 +1,31 @@
+  <!-- Loading Annimation -->  
+  <div class="containerrs" id="preLoading">
+    <div class="line"></div>
+    <div class="loader">
+      <div class="one-loader first">
+       <div class="v-line first-line"></div>
+       <div class="circle first-circle"></div>
+      </div>
+      <div class="one-loader">
+       <div class="v-line middle-line"></div>
+       <div class="circle middle-circle"></div>
+      </div>
+      <div class="one-loader">
+       <div class="v-line middle-line"></div>
+       <div class="circle middle-circle"></div>
+      </div>
+      <div class="one-loader">
+       <div class="v-line middle-line"></div>
+       <div class="circle middle-circle"></div>
+      </div>
+      <div class="one-loader last">
+       <div class="v-line last-line"></div>
+       <div class="circle last-circle"></div>
+      </div>
+     </div>
+    <h1>Loading</h1>
+  </div>
+
 <div style="margin-top: 90px"></div>
 
   <!-- HTML for the message box -->
@@ -7,6 +35,10 @@
     <span (click)="closeMessage()" style="font-size: 1.5em;" class="message-cross">&times;</span>
   </div>
   <!-- end of message box -->
+
+
+
+  <!-- end Loading Annimation -->
 <!-- navigation start -->
 <div class="categories">
   <div class="category">
@@ -58,7 +90,7 @@
 <div class="cards">
   <h2>New Products</h2>
   <div class="container">
-    <div *ngFor="let v of allProducts">
+    <div *ngFor="let v of allProducts.content">
       <div class="card-1 card-div" id="{{ v.id }}">
         <div (click)="shopping('formWishList', v)" class="like-icon-div">
           <label for="card-1-like" class="like-icon-div-child">
@@ -87,23 +119,64 @@
       </div>
     </div>
   </div>
+   <!-- Pagination -->
+   <div class="pagination">
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"
+              />
+      </svg>
+    </button>
+    <a class="page-link" style="cursor: pointer; text-decoration: none;
+    color: #343a40;
+    font-size: 18px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    "
+    [ngStyle]="{'background-color': s.clicked ? '#087f5b' : '', 'color': s.clicked ? '#fff' : '#343a40'}"
+    (click)="toggleClickedState(s)"
+    
+    *ngFor="let s of allProducts.totalPages; let i = index" id="kk">{{i}}</a>
 
-  <!-- Pagination -->
-  <nav aria-label="...">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
+    <!-- <a href="#" class="page-link">2</a>
+    <a href="#" class="page-link ">3</a>
+    <a href="#" class="page-link">4</a>
+    <a href="#" class="page-link">5</a>
+    <a href="#" class="page-link">6</a>
+    <span class="dots">...</span>
+    <a href="#" class="page-link">23</a> -->
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"
+              />
+      </svg>
+    </button>
+  </div>
   
 </div>
 
@@ -222,6 +295,50 @@
       </div>
     </div>
   </div>
+  
+   <!-- Pagination -->
+   <div class="pagination">
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"
+              />
+      </svg>
+    </button>
+    <a href="#" class="page-link">1</a>
+    <a href="#" class="page-link">2</a>
+    <a href="#" class="page-link page-link--current">3</a>
+    <a href="#" class="page-link">4</a>
+    <a href="#" class="page-link">5</a>
+    <a href="#" class="page-link">6</a>
+    <span class="dots">...</span>
+    <a href="#" class="page-link">23</a>
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"
+              />
+      </svg>
+    </button>
+  </div>
 </div>
 
 <!-- Most Popular -->
@@ -338,5 +455,48 @@
         </div>
       </div>
     </div>
+  </div>
+   <!-- Pagination -->
+   <div class="pagination">
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"
+              />
+      </svg>
+    </button>
+    <a href="#" class="page-link">1</a>
+    <a href="#" class="page-link">2</a>
+    <a href="#" class="page-link page-link--current">3</a>
+    <a href="#" class="page-link">4</a>
+    <a href="#" class="page-link">5</a>
+    <a href="#" class="page-link">6</a>
+    <span class="dots">...</span>
+    <a href="#" class="page-link">23</a>
+    <button class="btn">
+      <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="btn-icon"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor"
+           stroke-width="2"
+           >
+        <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"
+              />
+      </svg>
+    </button>
   </div>
 </div>

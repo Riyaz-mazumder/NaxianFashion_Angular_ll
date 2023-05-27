@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { NavbarComponent } from 'src/app/common/navbar/navbar.component';
@@ -14,7 +14,7 @@ import { WishListServiceService } from 'src/app/service/wish-list-service.servic
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, AfterViewInit{
   constructor(
     private service: DatabaseServiceService,
     private authService: AuthServiceService,
@@ -23,7 +23,16 @@ export class HomePageComponent implements OnInit {
     private wishListService: WishListServiceService,
     private http: HttpClient,
     private sharedService: ShareDataService,
+    private renderer: Renderer2,
   ) {}
+
+
+  ngAfterViewInit() {
+    this.renderer.listen(window, 'load', () => {
+      const preLoadingElement = document.getElementById('preLoading');
+      this.renderer.setStyle(preLoadingElement, 'display', 'none');
+    });
+  }
 
   // This One
   allProducts!: any;
@@ -38,12 +47,38 @@ export class HomePageComponent implements OnInit {
     this.service.getAllProducts().subscribe({
       next: (r) => {
         this.allProducts = r;
+        console.log(this.allProducts.totalPages -1);
+        this.service.productPage =  (this.allProducts.totalPages -1).toString();
+
+        // this.service.getAllProducts().subscribe({
+        //   next: (value) =>{
+        //     this.allProducts = value;
+        //     this.allProducts.content.reverse();
+        //   },
+        //   error: e=>{
+        //     this.message = "Somthing Went Wrong, If You See This Plese Contact Us";
+        //     this.showMessage();
+        //   }
+
+        // })
+        
       },
       error: (err) => {
-        this.message = "Somthing Went Wrong, If You See This Plese Report Us";
+        this.message = "Somthing Went Wrong, If You See This Plese Contact Us";
         this.showMessage();
       },
     });
+
+    if (this.allProducts.content.length > 0) {
+      this.allProducts.content[0].clicked = true; // Set first element to clicked
+    }
+   
+  }
+
+  toggleClickedState(element: any) {
+    element.clicked = !element.clicked;
+    console.log(element);
+    
   }
 
   cardList: any[] = [];

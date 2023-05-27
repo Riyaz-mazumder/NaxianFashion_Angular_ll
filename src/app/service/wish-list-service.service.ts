@@ -7,10 +7,10 @@ export class WishListServiceService {
   constructor(private http: HttpClient) {}
 
 
-  // private urlOfWishList = 'https://juicy-camera-production.up.railway.app/api/v1/wishList';
+  private urlOfWishList = 'https://juicy-camera-production.up.railway.app/api/v1/wishList';
 
   // changed
-  private urlOfWishList = 'http://localhost:8080/api/v1/wishList';
+  // private urlOfWishList = 'http://localhost:8080/api/v1/wishList';
 
   public addToWishList(d: any) {
     return this.http.post(this.urlOfWishList, d);

@@ -97,10 +97,8 @@ export class ShoptinCartComponent implements OnInit {
   Products!: any;
 
   ngOnInit(): void {
-
-    console.log(this.authService.getUser());
+    
     this.loggedIn = this.authService.getUser();
-    console.log(JSON.parse(this.loggedIn));
     
     if(this.loggedIn === null){
 
