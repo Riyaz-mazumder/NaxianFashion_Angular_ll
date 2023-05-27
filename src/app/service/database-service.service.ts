@@ -1,17 +1,40 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DatabaseServiceService {
+export class DatabaseServiceService implements OnInit{
   constructor(private http: HttpClient) {}
 
-  public productPage = '';
+
+
+
+  products: any;
+  ngOnInit(): void {
+    this.http.get<ProductResponse>("https://juicy-camera-production.up.railway.app/api/v1/products").subscribe({
+      next: n=>{
+        this.products = n;
+        console.log(this.products);
+        this.productPage = n.totalPages;
+        
+      },
+      error: e=>{
+        console.log(e);
+        
+      }
+    })
+  }
+
+
+
+  public productPage = 0;
+
+  public pro: string = (this.productPage -1).toString();
 
 
  // Products Table
-  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products?page=' + this.productPage;
+  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products?page=' + this.pro;
   // changed
   //  private url = 'http://localhost:8080/api/v1/products';
 
@@ -100,4 +123,46 @@ export class DatabaseServiceService {
   makeOrderApproved(id: any) {
     return this.http.put(this.oUrl + '/makeApprove/' + id, {});
   }
+}
+interface Product {
+  id: number;
+  createdDateTime: string;
+  createdBy: null;
+  updatedDateTime: string;
+  updatedBy: null;
+  name: string;
+  regularPrice: number;
+  offerPrice: number;
+  description: string;
+  quantity: number;
+  category: string;
+  subCate: string;
+  manufacture: string;
+  productSize: string;
+  productColor: string;
+  weight: string;
+  productImage_1: string;
+  productImage_2: string;
+  productImage_3: string;
+  storeName: null;
+  couponCode: string;
+  active: boolean;
+}
+
+interface ProductResponse {
+  content: Product[];
+  pageable: any;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
 }

@@ -48,7 +48,7 @@ export class HomePageComponent implements OnInit, AfterViewInit{
       next: (r) => {
         this.allProducts = r;
         console.log(this.allProducts.totalPages -1);
-        this.service.productPage =  (this.allProducts.totalPages -1).toString();
+        // this.service.productPage =  (this.allProducts.totalPages -1).toString();
 
         // this.service.getAllProducts().subscribe({
         //   next: (value) =>{
