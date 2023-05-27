@@ -14,7 +14,7 @@ import { WishListServiceService } from 'src/app/service/wish-list-service.servic
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
-export class HomePageComponent implements OnInit, AfterViewInit{
+export class HomePageComponent implements OnInit{
   constructor(
     private service: DatabaseServiceService,
     private authService: AuthServiceService,
@@ -27,12 +27,7 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   ) {}
 
 
-  ngAfterViewInit() {
-    this.renderer.listen(window, 'load', () => {
-      const preLoadingElement = document.getElementById('preLoading');
-      this.renderer.setStyle(preLoadingElement, 'display', 'none');
-    });
-  }
+ 
 
   // This One
   allProducts!: any;
@@ -41,12 +36,62 @@ export class HomePageComponent implements OnInit, AfterViewInit{
   loggedIn!: any;
   theUser!: any;
 
+
+  // ngOnInit(): void {
+
+  //   this.http.get<ProductResponse>("https://juicy-camera-production.up.railway.app/api/v1/products").subscribe({
+  //     next: n=>{
+  //       this.products = n;
+  //       console.log(this.products);
+  //       this.productPage = n.totalPages;
+  //     },
+  //     error: e=>{
+  //       console.log(e);
+        
+  //     }
+  //   })
+  // }
+
+
+pageId: number = 0;
+
+
+getProduct(page: number){
+  this.service.getProduct(page).subscribe({
+    next: (r) => {
+      // this.allProducts = r;
+      // this.allProducts.content.reverse();
+      // console.log(this.allProducts.totalPages -1);
+
+
+      // this.products = n;
+            // console.log(this.products);
+            this.pageId = r.totalPages;
+      
+    },
+    error: (err) => {
+      this.message = "Somthing Went Wrong, If You See This Plese Contact Us";
+      this.showMessage();
+    },
+  });
+
+}
+
   ngOnInit() {
+
+
     this.loggedIn = this.authService.getUser();
+
+    
+  
+
+ 
+
 
     this.service.getAllProducts().subscribe({
       next: (r) => {
         this.allProducts = r;
+        this.allProducts.content.reverse();
         console.log(this.allProducts.totalPages -1);
         // this.service.productPage =  (this.allProducts.totalPages -1).toString();
 

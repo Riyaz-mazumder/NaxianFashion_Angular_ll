@@ -35,8 +35,8 @@
                       <label class="form-label" for="form3Example1c"
                         >Your Name</label
                       >
-                      <div style="color: red;" *ngIf="!name.valid && email.touched" class="error-message">
-                        Name Field is Empty
+                      <div style="color: red;" *ngIf="!name.valid && name.touched" class="error-message">
+                        Name Feald is Empty 
                       </div>
                     </div>
                   </div>
@@ -124,8 +124,8 @@
                       <label class="form-label" for="form3Example4c"
                         >Password must be 6 characters long or more</label
                       >
-                      <div style="color: red;" *ngIf="!password.valid && email.touched" class="error-message">
-                        Email Feald is Empty
+                      <div style="color: red;" *ngIf="!password.valid && password.touched" class="error-message">
+                        Password Feald is Empty
                       </div>
                     </div>
                   </div>

@@ -4,27 +4,27 @@ import { Injectable, OnInit } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class DatabaseServiceService implements OnInit{
+export class DatabaseServiceService {
   constructor(private http: HttpClient) {}
 
 
 
 
   products: any;
-  ngOnInit(): void {
-    this.http.get<ProductResponse>("https://juicy-camera-production.up.railway.app/api/v1/products").subscribe({
-      next: n=>{
-        this.products = n;
-        console.log(this.products);
-        this.productPage = n.totalPages;
+  // ngOnInit(): void {
+
+  //   this.http.get<ProductResponse>("https://juicy-camera-production.up.railway.app/api/v1/products").subscribe({
+  //     next: n=>{
+  //       this.products = n;
+  //       console.log(this.products);
+  //       this.productPage = n.totalPages;
+  //     },
+  //     error: e=>{
+  //       console.log(e);
         
-      },
-      error: e=>{
-        console.log(e);
-        
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
 
 
@@ -34,9 +34,14 @@ export class DatabaseServiceService implements OnInit{
 
 
  // Products Table
-  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products?page=' + this.pro;
+  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
   // changed
   //  private url = 'http://localhost:8080/api/v1/products';
+
+getProduct(pageNo: number){
+  return this.http.get<ProductResponse>('https://juicy-camera-production.up.railway.app/api/v1/products?page=' + pageNo)
+}
+
 
 
   searchProducts(data: string){
@@ -50,7 +55,7 @@ export class DatabaseServiceService implements OnInit{
   }
 
   getAllProducts() {
-    return this.http.get(this.url);
+    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/products?page=' + 2");
   }
 
   getProductById(id: any) {

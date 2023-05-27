@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,18 +6,25 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+
+  constructor(private renderer: Renderer2){}
   link: string = '';
 
   checkUrl() {
     return this.link.includes('/admin');
   }
 
-  constructor() {}
-
   ngOnInit(): void {
     console.log(window.location.href);
 
     this.link = window.location.href;
+  }
+
+  ngAfterViewInit() {
+    this.renderer.listen(window, 'load', () => {
+      const preLoadingElement = document.getElementById('preLoading');
+      this.renderer.setStyle(preLoadingElement, 'display', 'none');
+    });
   }
 }

@@ -14,13 +14,24 @@
             class="input"
             type="text"
             required
+            #name="ngModel"
           />
+          <div style="color: red;" *ngIf="!name.valid && name.touched" class="error-message">
+            Name Field is Empty
+          </div>
           <p>Last name<span class="op">*</span></p>
           <input ngModel name="lastName" class="input" type="text" />
           <p>Email address<span class="op">*</span></p>
-          <input ngModel name="email" class="input" type="email" />
+          <input ngModel name="email" required #email="ngModel" class="input" type="email" />
+          
+          <div style="color: red;" *ngIf="!email.valid && email.touched" class="error-message">
+            Email is not correct
+          </div>
           <p>Phone number<span class="op">*</span></p>
-          <input ngModel name="phone" class="input" type="tel" value="+880" />
+          <input required  #phone="ngModel" ngModel name="phone" class="input" type="tel" value="+880" />
+          <div style="color: red;" *ngIf="!phone.valid && phone.touched" class="error-message">
+            Phone number Field is empty
+          </div>
           <div class="requist">
             <p>Delivery Address: <span id="op">(Required)</span></p>
             <!-- <input class="input" id="ok" type="text" /> -->
@@ -31,7 +42,12 @@
               id="ok"
               cols="30"
               rows="5"
+              required
+              #address="ngModel"
             ></textarea>
+            <div style="color: red;" *ngIf="!address.valid && address.touched" class="error-message">
+              Address Feald is Empty
+            </div>
           </div>
           <div class="requist">
             <p>Please write your request. <span id="op">(optional)</span></p>
