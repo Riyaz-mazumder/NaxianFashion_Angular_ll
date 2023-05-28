@@ -36,9 +36,10 @@ export class CheckOutPageComponent implements OnInit {
 
   submit(data: NgForm) {
     //  first setting the id value null
-    this.oneData.id = null;
 
-    data.value.theOrders = [this.oneData];
+    const arr =  "Product Id: " + this.oneData.id + " Quantity: " + this.oneData.quantity + " color: " +this.oneData.color + " size: " + this.oneData.size;
+
+    data.value.products = arr;
     data.value.customerId = this.authService.getUserId();
     data.value.isActive = true;
     data.value.isApproved = false;
@@ -46,8 +47,7 @@ export class CheckOutPageComponent implements OnInit {
 
     this.service.addOrder(data.value).subscribe({
       next: (r) => {
-       this.message = "Your Order Has Been Submitted. Tanks For Shopping With Us. ❤️ ";
-       this.showMessage();
+      alert("Your Order Has Been Submitted. Tanks For Shopping With Us. ❤️");
         data.reset();
         const emailRequest = { email: data.value.email, subject: "NaxianFahion Purchase", body: "Hey" +  data.value.firstName + 
         "Thanks For your Order, Your Order in Process, We Will Get Back To You Soon. -Naxian Fashion Team"};

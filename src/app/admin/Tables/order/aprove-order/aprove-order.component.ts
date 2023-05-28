@@ -11,10 +11,13 @@ export class AproveOrderComponent implements OnInit {
   allProducts!: any;
 
   ngOnInit(): void {
+    
     this.service.getAllUnApprovedOrders().subscribe({
       next: (r) => {
+        console.log('-------------------dddddddddddddd---------------------');
+
         this.allProducts = r;
-        console.log(r);
+        console.log('this.allProducts ', this.allProducts );
       },
       error: (err) => {
         console.log(err);

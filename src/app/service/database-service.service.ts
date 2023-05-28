@@ -101,9 +101,9 @@ getProduct(pageNo: number){
   }
 
   // Orders
-  oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  // oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
   // changed
-  // oUrl = 'http://localhost:8080/api/v1/orders';
+  oUrl = 'http://localhost:8080/api/v1/orders';
   addOrder(data: any) {
     return this.http.post(this.oUrl, data);
   }
