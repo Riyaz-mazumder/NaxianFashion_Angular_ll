@@ -38,6 +38,7 @@ import { TrackMyOrderComponent } from './Pages/track-my-order/track-my-order.com
 import { TrackMyOrderDetailsComponent } from './Pages/track-my-order-details/track-my-order-details.component';
 import { AddTrackingComponent } from './admin/add-tracking/add-tracking.component';
 import { MessageServiceComponent } from './service/message-service/message-service.component';
+import { TrakcByAdminComponent } from './admin/Pages/trakc-by-admin/trakc-by-admin.component';
 
 
 
@@ -75,6 +76,7 @@ import { MessageServiceComponent } from './service/message-service/message-servi
     TrackMyOrderDetailsComponent,
     AddTrackingComponent,
     MessageServiceComponent,
+    TrakcByAdminComponent,
   
   ],
   imports: [

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-tracking',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-tracking.component.scss']
 })
 export class AddTrackingComponent {
+  allTrack!: any;
 
+  update(d: number){
+
+  }
+
+  submit(data:NgForm){
+    
+  }
 }
