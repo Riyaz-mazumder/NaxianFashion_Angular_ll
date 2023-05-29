@@ -76,6 +76,7 @@ getProduct(page: number){
   });
 
 }
+isLoading: boolean = true;
 
   ngOnInit() {
 
@@ -113,6 +114,10 @@ getProduct(page: number){
         this.showMessage();
       },
     });
+    
+    setTimeout(() => {
+      this.isLoading = false; // Set isLoading to false to hide the loading animation after the content is loaded
+    }, 2000); // Adjust
 
     if (this.allProducts.content.length > 0) {
       this.allProducts.content[0].clicked = true; // Set first element to clicked
