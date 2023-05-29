@@ -45,7 +45,7 @@ getProduct(pageNo: number){
 
 
   searchProducts(data: string){
-    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product" + data)
+    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product/" + data)
     // changed
     // return this.http.get("http://localhost:8080/api/v1/product" + data)
   }

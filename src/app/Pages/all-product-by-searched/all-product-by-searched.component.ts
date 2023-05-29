@@ -12,6 +12,7 @@ import { WishListServiceService } from 'src/app/service/wish-list-service.servic
   styleUrls: ['./all-product-by-searched.component.scss']
 })
 export class AllProductBySearchedComponent {
+  
   constructor(
     private service: DatabaseServiceService,
     private authService: AuthServiceService,
