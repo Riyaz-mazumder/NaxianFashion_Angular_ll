@@ -19,6 +19,8 @@ export class AllProductsComponent implements OnInit {
     this.service.getAllProducts().subscribe({
       next: (r) => {
         this.allProducts = r;
+        console.log(this.allProducts);
+        
         this.allProducts.content.reverse();
       },
       error: (err) => {

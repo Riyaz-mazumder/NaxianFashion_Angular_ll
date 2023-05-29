@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatabaseServiceService } from 'src/app/service/database-service.service';
 
 @Component({
@@ -7,17 +8,17 @@ import { DatabaseServiceService } from 'src/app/service/database-service.service
   styleUrls: ['./aprove-order.component.scss'],
 })
 export class AproveOrderComponent implements OnInit {
-  constructor(private service: DatabaseServiceService) {}
+  constructor(
+    private service: DatabaseServiceService,
+    private router: Router,
+    ) {}
   allProducts!: any;
 
   ngOnInit(): void {
     
     this.service.getAllUnApprovedOrders().subscribe({
       next: (r) => {
-        console.log('-------------------dddddddddddddd---------------------');
-
         this.allProducts = r;
-        console.log('this.allProducts ', this.allProducts );
       },
       error: (err) => {
         console.log(err);
@@ -27,15 +28,8 @@ export class AproveOrderComponent implements OnInit {
   }
 
   onApprove(obj: any) {
-    this.service.makeOrderApproved(obj.id).subscribe({
-      next: (r) => {
-        alert('The Order Has been Approved...');
-        this.ngOnInit();
-      },
-      error: (e) => {
-        alert('Something went wrong try again');
-      },
-    });
+    
+    this.router.navigate(['/admin/dashbord/approveOrder/tracking/' + obj.id])
   }
   onDenied(obj: any) {
     alert('The Order Has been Denied...');

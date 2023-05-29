@@ -19,7 +19,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of allProducts">
+      <ng-container *ngFor="let i of allProducts">
+      <tr *ngIf="!i.approved">
         <td>{{ i.firstName }}</td>
         <td>{{ i.lastName }}</td>
         <td>{{ i.email }}</td>
@@ -56,6 +57,7 @@
           <button class="btn btn-danger" (click)="onDenied(i)">Denied</button>
         </td>
       </tr>
+    </ng-container>
     </tbody>
   </table>
 

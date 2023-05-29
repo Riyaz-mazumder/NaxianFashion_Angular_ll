@@ -12,37 +12,41 @@
         <th scope="col">Payment Method</th>
         <th scope="col">Bikash No</th>
         <th scope="col">TrxID</th>
+        <th scope="col">Approved Status</th>
         <!-- <th scope="col">Order Item Name</th>
           <th scope="col">Order Item ID</th> -->
         <!-- <th scope="col">The User</th> -->
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let i of allProducts">
-        <td>{{ i.firstName }}</td>
-        <td>{{ i.lastName }}</td>
-        <td>{{ i.email }}</td>
-        <td>{{ i.phone }}</td>
-        <td>{{ i.address }}</td>
-        <td>{{ i.request }}</td>
-        <td>{{ i.amount }}</td>
-        <td>{{ i.paymentMethod }}</td>
-        <td>
-          <span *ngIf="i.paymentMethod === 'cashOn'"
-            >The Order Was CashOn Delivery</span
-          >
-          <span *ngIf="i.paymentMethod !== 'cashOn'">{{ i.bikashNo }}</span>
-        </td>
-        <td>
-          <span *ngIf="i.paymentMethod === 'cashOn'"
-            >The Order Was CashOn Delivery</span
-          >
-          <span *ngIf="i.paymentMethod !== 'cashOn'">{{ i.TrxID }}</span>
-        </td>
-        <!-- <td>{{ i.theOrder.name }}</td>
+      <ng-container *ngFor="let i of allProducts">
+        <tr>
+          <td>{{ i.firstName }}</td>
+          <td>{{ i.lastName }}</td>
+          <td>{{ i.email }}</td>
+          <td>{{ i.phone }}</td>
+          <td>{{ i.address }}</td>
+          <td>{{ i.request }}</td>
+          <td>{{ i.amount }}</td>
+          <td>{{ i.paymentMethod }}</td>
+          <td>
+            <span *ngIf="i.paymentMethod === 'cashOn'"
+              >The Order Was CashOn Delivery</span
+            >
+            <span *ngIf="i.paymentMethod !== 'cashOn'">{{ i.bikashNo }}</span>
+          </td>
+          <td>
+            <span *ngIf="i.paymentMethod === 'cashOn'"
+              >The Order Was CashOn Delivery</span
+            >
+            <span *ngIf="i.paymentMethod !== 'cashOn'">{{ i.TrxID }}</span>
+          </td>
+          <!-- <td>{{ i.theOrder.name }}</td>
           <td>{{ i.theOrder.id }}</td> -->
-        <!-- <td>{{ i.theUser.name }}</td> -->
-      </tr>
+          <!-- <td>{{ i.theUser.name }}</td> -->
+          <td>{{ i.approved }}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 

@@ -22,6 +22,8 @@ import { TryOnSunglassComponent } from './Pages/try-on-sunglass/try-on-sunglass.
 import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
 import { TrackMyOrderDetailsComponent } from './Pages/track-my-order-details/track-my-order-details.component';
 import { TrackMyOrderComponent } from './Pages/track-my-order/track-my-order.component';
+import { TrakcByAdminComponent } from './admin/Pages/trakc-by-admin/trakc-by-admin.component';
+import { TrackingDetailsComponent } from './admin/tracking-details/tracking-details.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -50,6 +52,8 @@ const routes: Routes = [
       { path: 'approveOrders', component: AproveOrderComponent },
       { path: 'showAllOrders', component: ShowOrderComponent },
       { path: 'allUser', component: AllUserComponent },
+      { path: 'approveOrder/tracking/:id', component: TrakcByAdminComponent },
+      { path: 'trackingDetails/:id', component: TrackingDetailsComponent },
     ],
   },
 ];

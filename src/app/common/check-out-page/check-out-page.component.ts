@@ -53,11 +53,13 @@ export class CheckOutPageComponent implements OnInit {
         "Thanks For your Order, Your Order in Process, We Will Get Back To You Soon. -Naxian Fashion Team"};
         this.emailService.sendEmail(emailRequest).subscribe({
           next: n=>{
+            console.log(n);
             
             
           },
           error: e=>{
-     
+              console.log(e);
+              
           }
         });
         this.router.navigate(['/home']);

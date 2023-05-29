@@ -101,9 +101,9 @@ getProduct(pageNo: number){
   }
 
   // Orders
-  // oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
   // changed
-  oUrl = 'http://localhost:8080/api/v1/orders';
+  // oUrl = 'http://localhost:8080/api/v1/orders';
   addOrder(data: any) {
     return this.http.post(this.oUrl, data);
   }
@@ -111,13 +111,13 @@ getProduct(pageNo: number){
     return this.http.delete(this.oUrl + '/' + id);
   }
   getAllUnApprovedOrders() {
-    return this.http.get(this.oUrl + '/unApproved');
+    return this.http.get<CustomerProductOrder>(this.oUrl);
   }
   getAllApprovedOrders() {
-    return this.http.get(this.oUrl + '/approved');
+    return this.http.get(this.oUrl);
   }
   getAllOrders() {
-    return this.http.get(this.oUrl);
+    return this.http.get<CustomerProductOrder>(this.oUrl);
   }
   getTheOrder(id: any) {
     return this.http.get(this.oUrl + '/' + id);
@@ -127,6 +127,20 @@ getProduct(pageNo: number){
   }
   makeOrderApproved(id: any) {
     return this.http.put(this.oUrl + '/makeApprove/' + id, {});
+  }
+
+  sendEmail(data: any){
+    return this.http.post("https://juicy-camera-production.up.railway.app/api/v1/sendEmail", data)
+  }
+
+  trackUrl = "https://juicy-camera-production.up.railway.app/api/v1/track"
+
+  getTrackById(id: number){
+    return this.http.get(this.trackUrl + "/" + id);
+  }
+
+  addToTrack(data: any){
+    return this.http.post(this.trackUrl, data);
   }
 }
 interface Product {
@@ -170,4 +184,24 @@ interface ProductResponse {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
+}
+interface CustomerProductOrder {
+  id: number;
+  createdDateTime: string;
+  createdBy: null | string;
+  updatedDateTime: string;
+  updatedBy: null | string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  amount: number;
+  products: string;
+  customerId: null | string;
+  paymentMethod: string;
+  bikashNo: string;
+  approved: boolean;
+  trxID: null | string;
+  active: boolean;
 }

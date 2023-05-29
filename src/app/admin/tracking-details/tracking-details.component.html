@@ -1,0 +1,75 @@
+<div style="margin-top: 150px; margin-bottom: 200px;" class="banner">
+
+    <div>
+        <h1>Tracking Details</h1>
+      <h3>Name: <span>{{trackingProduct.firstName}}</span></h3>
+      <hr><h4>Email: <span>{{trackingProduct.email}}</span></h4>
+
+      <h4>Traking ID: <span>SL-{{trackingProduct.id}} </span></h4>
+
+    </div>
+    <br>
+    <div>
+     <h2>Add Tracking Point's</h2>
+     <form class="mt-5" (ngSubmit)="submit(f)" #f="ngForm">
+      <div class="mb-3">
+          <label for="Kategori" class="form-label">Picked Up</label>
+          <select
+            ngModel
+            name="pickedUp"
+            id="Kategori"
+            class="ms-1 d-block w-100"
+            required
+          >
+            <option value="false">False</option>
+            <option value="true">Done</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Kategori" class="form-label">inTransit</label>
+          <select
+            ngModel
+            name="inTransit"
+            id="Kategori"
+            class="ms-1 d-block w-100"
+            required
+          >
+            <option value="false">False</option>
+            <option value="true">Done</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Kategori" class="form-label">Out ForDelivery</label>
+          <select
+            ngModel
+            name="outForDelivery"
+            id="Kategori"
+            class="ms-1 d-block w-100"
+            required
+          >
+            <option value="false">False</option>
+            <option value="true">Done</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="Kategori" class="form-label"> delivered</label>
+          <select
+            ngModel
+            name="delivered"
+            id="Kategori"
+            class="ms-1 d-block w-100"
+            required
+          >
+            <option value="false">False</option>
+            <option value="true">Done</option>
+          </select>
+        </div>
+        <input type="hidden" ngModel name="trackingNum">
+        <button class="btn btn-success" type="submit">Add</button>
+    </form>
+
+     
+    </div>
+   
+
+</div>
