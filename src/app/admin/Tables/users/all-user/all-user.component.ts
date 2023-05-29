@@ -7,17 +7,18 @@ import { DatabaseServiceService } from 'src/app/service/database-service.service
   styleUrls: ['./all-user.component.scss'],
 })
 export class AllUserComponent implements OnInit {
-  allProducts!: any;
+  allUsers!: any;
 
   constructor(private service: DatabaseServiceService) {}
 
   ngOnInit(): void {
     this.service.getAllUsers().subscribe({
       next: (r) => {
-        this.allProducts = r;
+        this.allUsers = r;
       },
       error: (e) => {
-        alert(e);
+        console.log(e);
+        
       },
     });
   }

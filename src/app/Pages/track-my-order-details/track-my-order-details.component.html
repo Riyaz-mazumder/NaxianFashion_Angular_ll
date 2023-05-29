@@ -9,20 +9,20 @@
       📝 Confirmed
     </label>
     <label for="checkbox-2">
-      <input disabled type="checkbox" id="checkbox-2" name="checkbox-2"/>
+      <input [checked]="pickedUp === 'true'" [disabled]="pickedUp === null || pickedUp ===''"  type="checkbox" id="checkbox-2" name="checkbox-2"/>
       🛒 Pickd-up
     </label>
    
     <label for="checkbox-3">
-      <input disabled type="checkbox" id="checkbox-3" name="checkbox-3"/>
+      <input [checked]="inTransit === 'true'" [disabled]="inTransit === null"  type="checkbox" id="checkbox-3" name="checkbox-3"/>
      🚚 In Transit
     </label>
      <label for="checkbox-2">
-      <input disabled type="checkbox" id="checkbox-5" name="checkbox-5"/>
+      <input [checked]="outForDelivery === 'true'" [disabled]="outForDelivery === null" type="checkbox" id="checkbox-5" name="checkbox-5"/>
       🛵 out For Delivery
     </label>
      <label for="checkbox-2">
-      <input disabled type="checkbox" id="checkbox-7" name="checkbox-7"/>
+      <input  [checked]="delivered === 'true'" [disabled]="delivered === null" disabled type="checkbox" id="checkbox-7" name="checkbox-7"/>
       📦 Delivered
     </label>
   </div>

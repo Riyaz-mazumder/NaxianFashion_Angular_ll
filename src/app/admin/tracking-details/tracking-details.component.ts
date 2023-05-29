@@ -34,26 +34,45 @@ export class TrackingDetailsComponent implements OnInit{
 
   submit(data:NgForm){
     data.value.trackingNum =  "SL-" + this.trackingProduct.id;
-    this.dataservice.addToTrack(data.value).subscribe({
-      next: n =>{
-        console.log(n);
-        const emailRequest = { email: this.trackingProduct.email, subject: "NaxianFahion Purchase in Progress ", body: " Now You Can Track Your Parcel By This ID: SL-" +  this.id};
-        this.dataservice.sendEmail(emailRequest).subscribe({
-          next: r=>{
-            console.log(r);
-            alert("The Pickup point added");
-            
-          },
-          error: e=>{
-            console.log(e);
-            
-          }
-        })
+
+    console.log(data.value);
+
+    const emailRequest = { to: this.trackingProduct.email, subject: "NaxianFahion Purchase in Progress ", body: " Now You Can Track Your Parcel By This ID: SL-" +  this.id};
+    
+    console.log(emailRequest);
+    
+    this.dataservice.sendEmail(emailRequest).subscribe({
+      next: r=>{
+        console.log(r);
+        alert("The Pickup point added");
+        
       },
       error: e=>{
         console.log(e);
+        
       }
     })
-  }
+    if(data.value.inTransit){
+      localStorage.setItem("inTransit", data.value.inTransit);
+    }if( data.value.pickedUp){
+      localStorage.setItem("pickedUp", data.value.pickedUp);
+    }if(data.value.outForDelivery){
+      localStorage.setItem("outForDelivery", data.value.outForDelivery);
+    }if(data.value.delivered){
+      localStorage.setItem("delivered", data.value.delivered);
+    }
+   
+  //   this.dataservice.addToTrack(data.value).subscribe({
+  //     next: n =>{
+  //       console.log(n);
+  //       console.log(n);
+  //       alert("The Pickup point added");
+       
+  //     },
+  //     error: e=>{
+  //       console.log(e);
+  //     }
+  //   })
+   }
 
 }

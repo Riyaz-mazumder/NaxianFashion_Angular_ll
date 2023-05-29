@@ -31,13 +31,13 @@
                         placeholder="Enter User Email"
                         email
                         required
-                        #name="ngModel"
+                        #email="ngModel"
                       />
                      
                     </div>
                     <br>
-                    <div style="color: red;" *ngIf="!name.valid && name.touched" class="error-message">
-                      Name Feald is not Valid
+                    <div style="color: red;" *ngIf="!email.valid && email.touched" class="error-message">
+                      Email is not Valid
                     </div> 
                   </div>
 

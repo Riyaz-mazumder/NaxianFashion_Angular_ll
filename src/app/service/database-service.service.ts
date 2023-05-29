@@ -81,7 +81,7 @@ getProduct(pageNo: number){
 
   /// User Account
   // uUrl = 'http://localhost:8080/api/v1/customers';
-  uUrl = 'https://juicy-camera-production.up.railway.app/v1/customers';
+  uUrl = 'https://juicy-camera-production.up.railway.app/api/v1/customers';
   // 
 
   addUser(data: any) {
@@ -108,7 +108,7 @@ getProduct(pageNo: number){
     return this.http.post(this.oUrl, data);
   }
   deleteOrder(id: any) {
-    return this.http.delete(this.oUrl + '/' + id);
+    return this.http.delete(this.oUrl + '/delete/' + id);
   }
   getAllUnApprovedOrders() {
     return this.http.get<CustomerProductOrder>(this.oUrl);

@@ -8,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
 export class TrackMyOrderDetailsComponent implements OnInit{
 
   id!: any;
+
+  pickedUp!: string | null;
+  inTransit!: string | null;
+  outForDelivery!: string | null;
+  delivered!: string | null;
+
   
   ngOnInit(): void {
+    this.pickedUp = localStorage.getItem("pickedUp");
+    this.inTransit = localStorage.getItem("inTransit");
+    this.outForDelivery = localStorage.getItem("outForDelivery");
+    this.delivered = localStorage.getItem("delivered");
+    console.log(this.pickedUp +"   -----------------");
     
   }
 

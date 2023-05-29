@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
 
   constructor(private renderer: Renderer2){}
   link: string = '';
@@ -21,10 +21,5 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.link = window.location.href;
   }
 
-  ngAfterViewInit() {
-    this.renderer.listen(window, 'load', () => {
-      const preLoadingElement = document.getElementById('preLoading');
-      this.renderer.setStyle(preLoadingElement, 'display', 'none');
-    });
-  }
+
 }

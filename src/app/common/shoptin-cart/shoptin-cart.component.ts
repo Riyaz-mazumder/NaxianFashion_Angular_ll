@@ -79,6 +79,12 @@ export class ShoptinCartComponent implements OnInit {
   updateQuantity(index: number, d: any, quantity: number) {
     d.productQuantity = quantity;
 
+    this.loggedIn = this.authService.getUser();
+    
+    if(this.loggedIn === null){
+      
+    }
+
     // possible change
     this.service.updateCart(d).subscribe({
       next: (r) => {

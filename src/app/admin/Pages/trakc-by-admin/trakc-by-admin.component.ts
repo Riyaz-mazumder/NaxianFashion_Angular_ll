@@ -33,6 +33,16 @@ export class TrakcByAdminComponent implements OnInit{
   }
 
 onThirdParty(){
+ 
+ this.dataservice.deleteOrder(this.id).subscribe({
+  next: n=>{
+    console.log(n);
+    
+  },
+  error: e=>{
+    console.log(e);  
+  }
+ });
  alert("Order Has Been Proced")
  this.router.navigate(["/admin/dashbord/approveOrders"]);
 }
