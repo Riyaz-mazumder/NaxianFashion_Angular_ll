@@ -36,6 +36,7 @@ export class TryOnSunglassComponent implements OnInit{
 
   ngOnInit() {
    this.url = this.authservice.getThetryOnGlassLink();
+   
    if(this.authservice.getThetryOnGlassLink() === null || this.authservice.getThetryOnGlassLink() === ""){
     //Set the dynamic value for the iframe src
     this.url = 'https://jeeliz.com/sunglasses/?sku=rayban_cockpit_or_vert_classique';
