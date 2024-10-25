@@ -34,20 +34,20 @@ export class DatabaseServiceService {
 
 
  // Products Table
-  private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
+ // private url = 'https://juicy-camera-production.up.railway.app/api/v1/products';
   // changed
-  //  private url = 'http://localhost:8080/api/v1/products';
+   private url = 'http://localhost:8080/api/v1/products';
 
-getProduct(pageNo: number){
-  return this.http.get<ProductResponse>('https://juicy-camera-production.up.railway.app/api/v1/products?page=' + pageNo)
-}
+  getProduct(pageNo: number){
+   return this.http.get<ProductResponse>('https://juicy-camera-production.up.railway.app/api/v1/products?page=' + pageNo)
+  }
 
 
 
   searchProducts(data: string){
-    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product/" + data)
+    //return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/product/" + data)
     // changed
-    // return this.http.get("http://localhost:8080/api/v1/product" + data)
+     return this.http.get("http://localhost:8080/api/v1/product" + data)
   }
 
   addNewProduct(data: any) {
@@ -55,7 +55,7 @@ getProduct(pageNo: number){
   }
 
   getAllProducts() {
-    return this.http.get("https://juicy-camera-production.up.railway.app/api/v1/products?page=' + 2");
+    return this.http.get("http://localhost:8080/api/v1/products?page=' + 2");
   }
 
   getProductById(id: any) {
@@ -71,8 +71,8 @@ getProduct(pageNo: number){
   }
 
   // Admin Table
-  // urlAdminLogin = 'http://localhost:8080/api/v1/admins';
-  urlAdminLogin = 'https://juicy-camera-production.up.railway.app/v1/admins';
+      urlAdminLogin = 'http://localhost:8080/api/v1/admins';
+    //urlAdminLogin = 'https://juicy-camera-production.up.railway.app/v1/admins';
 
 
   getAdminCredential() {
@@ -80,8 +80,9 @@ getProduct(pageNo: number){
   }
 
   /// User Account
-  // uUrl = 'http://localhost:8080/api/v1/customers';
-  uUrl = 'https://juicy-camera-production.up.railway.app/api/v1/customers';
+   uUrl = 'http://localhost:8080/api/v1/customers';
+
+  //uUrl = 'https://juicy-camera-production.up.railway.app/api/v1/customers';
   // 
 
   addUser(data: any) {
@@ -101,9 +102,9 @@ getProduct(pageNo: number){
   }
 
   // Orders
-  oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
+  // oUrl = 'https://juicy-camera-production.up.railway.app/api/v1/orders';
   // changed
-  // oUrl = 'http://localhost:8080/api/v1/orders';
+    oUrl = 'http://localhost:8080/api/v1/orders';
   addOrder(data: any) {
     return this.http.post(this.oUrl, data);
   }
@@ -130,10 +131,10 @@ getProduct(pageNo: number){
   }
 
   sendEmail(data: any){
-    return this.http.post("https://juicy-camera-production.up.railway.app/api/v1/sendEmail", data)
+    return this.http.post("http://localhost:8080/api/v1/sendEmail", data)
   }
 
-  trackUrl = "https://juicy-camera-production.up.railway.app/api/v1/track"
+  trackUrl = "http://localhost:8080/api/v1/track"
 
   getTrackById(id: number){
     return this.http.get(this.trackUrl + "/" + id);

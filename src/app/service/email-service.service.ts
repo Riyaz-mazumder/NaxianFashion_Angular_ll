@@ -8,7 +8,7 @@ export class EmailServiceService {
 
   constructor(private http: HttpClient) { }
 
- private url = "https://juicy-camera-production.up.railway.app/api/v1/send-email"
+ private url = "http://localhost:8080/api/v1/send-email"
 
   public sendEmail(data: any){
    return this.http.post(this.url, data);
